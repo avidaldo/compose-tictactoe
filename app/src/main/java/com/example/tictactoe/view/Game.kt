@@ -13,17 +13,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import com.example.tictactoe.R
+import com.example.tictactoe.viewmodel.TresEnRayaViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 @Composable
-fun Game() {
+fun Game(viewModel : TresEnRayaViewModel = viewModel()) {
     Scaffold(topBar = {
         TopAppBar(
             title = { Text(text = stringResource(id = R.string.tictactoe)) },
             actions = {
-/*                TextButton(onClick = { }) {
-                    Text(text = stringResource(R.string.restart))
-                }*/
                 IconButton(onClick = { }) {
                     Icon(imageVector = Icons.Filled.Refresh, contentDescription = "Favorito")
                 }
@@ -64,7 +63,7 @@ fun VerticalTicTacToe() {
         verticalArrangement = SpaceEvenly,
         horizontalAlignment = CenterHorizontally
     ) {
-        VerticalBoard()
+        VerticalBoard(onButtonSelecte)
         WinnerBlock()
     }
 }
