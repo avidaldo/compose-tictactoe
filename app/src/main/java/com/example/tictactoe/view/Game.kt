@@ -23,7 +23,7 @@ fun Game(viewModel : TresEnRayaViewModel = viewModel()) {
         TopAppBar(
             title = { Text(text = stringResource(id = R.string.tictactoe)) },
             actions = {
-                IconButton(onClick = { }) {
+                IconButton(onClick = { viewModel.onReset()}) {
                     Icon(imageVector = Icons.Filled.Refresh, contentDescription = "Favorito")
                 }
             }
@@ -35,7 +35,7 @@ fun Game(viewModel : TresEnRayaViewModel = viewModel()) {
                 .padding(it)
         ) {
             when (LocalConfiguration.current.orientation) {
-                Configuration.ORIENTATION_PORTRAIT -> VerticalTicTacToe()
+                Configuration.ORIENTATION_PORTRAIT -> VerticalTicTacToe(viewModel)
                 Configuration.ORIENTATION_LANDSCAPE -> HorizontalTicTacToe()
                 else -> throw RuntimeException()
             }
@@ -57,13 +57,13 @@ fun HorizontalTicTacToe() {
 
 
 @Composable
-fun VerticalTicTacToe() {
+fun VerticalTicTacToe(viewModel: TresEnRayaViewModel) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = SpaceEvenly,
         horizontalAlignment = CenterHorizontally
     ) {
-        VerticalBoard(onButtonSelecte)
+        VerticalBoard(viewModel)
         WinnerBlock()
     }
 }

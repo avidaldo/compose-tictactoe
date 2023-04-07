@@ -3,34 +3,41 @@ package com.example.tictactoe.view
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.tictactoe.viewmodel.TresEnRayaViewModel
 
 
-private const val boardSize = 3
 
-private val spaceByDefault = 8.dp
-private val boardPadding = 25.dp
+
+private val SPACE_DEFAULT = 8.dp
+private val BOARD_PADDING = 25.dp
 
 @Composable
-fun VerticalBoard(onClick: (Int, Int) -> Unit) {
+fun VerticalBoard(viewModel: TresEnRayaViewModel) {
 
-  //  val viewModel: TresEnRayaViewModel by viewModels()
+    val gameUiState by viewModel.uiState.collectAsState()
 
-    Column(Modifier.padding(boardPadding),
+    Column(
+        Modifier.padding(BOARD_PADDING),
         verticalArrangement = Arrangement.spacedBy(
-            space = spaceByDefault,
-            alignment = Alignment.CenterVertically)) {
+            space = SPACE_DEFAULT,
+            alignment = Alignment.CenterVertically
+        )
+    ) {
 
-        repeat(boardSize) {row ->
-            Row(horizontalArrangement = Arrangement.spacedBy(spaceByDefault)) {
-                repeat(boardSize) {column ->
-                    Button(onClick = { onClick(row,column) },
+        repeat(3) { row ->
+            Row(horizontalArrangement = Arrangement.spacedBy(SPACE_DEFAULT)) {
+                repeat(3) { column ->
+                    Button(
+                        onClick = { viewModel.onClick(row, column) },
                         Modifier
                             .weight(1f)
-                            .aspectRatio(1f)) { /*TODO*/ }
+                            .aspectRatio(1f)
+                    ) { gameUiState.board[row][column] }
                 }
             }
         }
@@ -40,18 +47,23 @@ fun VerticalBoard(onClick: (Int, Int) -> Unit) {
 
 @Composable
 fun HorizontalBoard() {
-    Row(Modifier.padding(boardPadding),
+    Row(
+        Modifier.padding(BOARD_PADDING),
         horizontalArrangement = Arrangement.spacedBy(
-            space = spaceByDefault,
-            alignment = Alignment.CenterHorizontally)) {
+            space = SPACE_DEFAULT,
+            alignment = Alignment.CenterHorizontally
+        )
+    ) {
 
-        repeat(boardSize) {
-            Column(verticalArrangement = Arrangement.spacedBy(spaceByDefault)) {
-                repeat(boardSize) {
-                    Button(onClick = { /*TODO*/ },
+        repeat(3) {
+            Column(verticalArrangement = Arrangement.spacedBy(SPACE_DEFAULT)) {
+                repeat(3) {
+                    Button(
+                        onClick = { /*TODO*/ },
                         Modifier
                             .weight(1f)
-                            .aspectRatio(1f)) { /*TODO*/ }
+                            .aspectRatio(1f)
+                    ) { /*TODO*/ }
                 }
             }
         }
