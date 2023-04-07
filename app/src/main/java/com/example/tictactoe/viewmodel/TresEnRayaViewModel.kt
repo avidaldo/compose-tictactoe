@@ -14,13 +14,13 @@ class TresEnRayaViewModel() : ViewModel() {
 
 
     fun onClick(row: Int, col: Int) {
-        _uiState.value = _uiState.value.copy(board = _uiState.value.board.apply {
+/*        _uiState.value = _uiState.value.copy(board = _uiState.value.board.apply {
             this[1][1].value = GameUIState.Companion.Player.X
-        })
- /*       _uiState.update {
+        })*/
+        _uiState.update {
             it.marcar(row, col)
             it.copy(board = it.board)
-        }*/
+        }
     }
 
     fun onReset() {

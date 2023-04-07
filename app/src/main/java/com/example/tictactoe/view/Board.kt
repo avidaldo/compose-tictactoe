@@ -2,6 +2,7 @@ package com.example.tictactoe.view
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -37,7 +38,9 @@ fun VerticalBoard(viewModel: TresEnRayaViewModel) {
                         Modifier
                             .weight(1f)
                             .aspectRatio(1f)
-                    ) { gameUiState.board[row][column] }
+                    ) {
+                        Text(text = gameUiState.board[row][column].toString())
+                    }
                 }
             }
         }
