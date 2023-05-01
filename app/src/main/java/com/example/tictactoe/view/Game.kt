@@ -1,70 +1,49 @@
 package com.example.tictactoe.view
 
-import android.content.res.Configuration
-import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement.SpaceEvenly
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
-import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.tictactoe.R
 import com.example.tictactoe.viewmodel.TresEnRayaViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 @Composable
-fun Game(viewModel : TresEnRayaViewModel = viewModel()) {
+fun Game(viewModel: TresEnRayaViewModel = viewModel()) {
     Scaffold(topBar = {
         TopAppBar(
             title = { Text(text = stringResource(id = R.string.tictactoe)) },
             actions = {
-                IconButton(onClick = { viewModel.onReset()}) {
+                IconButton(onClick = { viewModel.onReset() }) {
                     Icon(imageVector = Icons.Filled.Refresh, contentDescription = "Favorito")
                 }
             }
         )
     }) {
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(it)
+                .padding(it),
+            verticalArrangement = SpaceEvenly,
+            horizontalAlignment = CenterHorizontally
         ) {
-            when (LocalConfiguration.current.orientation) {
-                Configuration.ORIENTATION_PORTRAIT -> VerticalTicTacToe(viewModel)
-                Configuration.ORIENTATION_LANDSCAPE -> HorizontalTicTacToe()
-                else -> throw RuntimeException()
-            }
+            VerticalBoard(viewModel)
         }
-    }
-}
 
-@Composable
-fun HorizontalTicTacToe() {
-    Row(
-        modifier = Modifier.fillMaxSize(),
-        horizontalArrangement = SpaceEvenly,
-        verticalAlignment = CenterVertically
-    ) {
-        HorizontalBoard()
-        WinnerBlock()
     }
 }
 
 
-@Composable
-fun VerticalTicTacToe(viewModel: TresEnRayaViewModel) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = SpaceEvenly,
-        horizontalAlignment = CenterHorizontally
-    ) {
-        VerticalBoard(viewModel)
-        WinnerBlock()
-    }
-}
 
