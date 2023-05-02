@@ -39,7 +39,12 @@ fun Game(viewModel: TresEnRayaViewModel = viewModel()) {
             verticalArrangement = SpaceEvenly,
             horizontalAlignment = CenterHorizontally
         ) {
-            VerticalBoard(viewModel)
+            VerticalBoard(onClick = { row, column -> viewModel.onClick(row, column) },
+                getCellString = { row, column ->
+                    viewModel.board[listOf(row, column)]?.toString() ?: ""
+                })
+            viewModel.winner?.let { WinnerBlock(viewModel.winner?.toString() ?: "") }
+
         }
 
     }
