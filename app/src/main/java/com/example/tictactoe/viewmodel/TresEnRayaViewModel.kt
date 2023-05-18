@@ -23,7 +23,9 @@ class TresEnRayaViewModel() : ViewModel() {
         listOf(2, 1) to null,
         listOf(2, 2) to null,
     )
-    val board get() = _board
+    val board get() = _board.toMap()
+
+
 
 
     private var _playerInTurn by mutableStateOf(Player.X)

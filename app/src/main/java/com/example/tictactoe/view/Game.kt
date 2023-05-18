@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.tictactoe.R
+import com.example.tictactoe.viewmodel.Player
 import com.example.tictactoe.viewmodel.TresEnRayaViewModel
 
 
@@ -44,11 +45,11 @@ fun Game(viewModel: TresEnRayaViewModel = viewModel()) {
                     viewModel.board[listOf(row, column)]?.toString() ?: ""
                 })
             viewModel.winner?.let { WinnerBlock(viewModel.winner?.toString() ?: "") }
-
         }
 
     }
 }
+
 
 
 
